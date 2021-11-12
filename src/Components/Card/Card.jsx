@@ -1,8 +1,8 @@
 import React from "react";
 import CardImage from "./CardImage";
-import CardTitle from "./CardTitle";
+import CardTitle from "./CardTitle/CardTitle";
 import CardBody from "./CardBody";
-import PrimaryButton from "../Buttons/PrimaryButton";
+import PrimaryButton from "../Buttons/PrimaryButton/PrimaryButton";
 
 const Card = ({ title = "Sin Título", imgUrl, text, linkBtn, oferta=false }) => {
   return (
