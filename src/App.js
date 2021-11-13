@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import "./App.css";
 import Card from "./Components/Card/Card";
 import fetchItems from "./services/fetchItems";
 
 function App() {
-  const items = fetchItems();
+  // const items = fetchItems();
+  const [items, setItems] = useState(fetchItems())
+  
   return (
     <div className="container-fluid">
       <div className="row">
