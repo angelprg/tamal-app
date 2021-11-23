@@ -1,24 +1,21 @@
-import { useState } from 'react';
 import "./App.css";
-import Card from "./Components/Card/Card";
-import fetchItems from "./services/fetchItems";
+import {Route, Routes} from 'react-router-dom'
+import Atoles from './Components/Atoles/Atoles';
+import Tamales from './Components/Tamales/Tamales';
+import Navbar from './Components/Navbar';
+import Home from './Components/Home';
 
 function App() {
-  // const items = fetchItems();
-  const [items, setItems] = useState(fetchItems())
   
   return (
     <div className="container-fluid">
       <div className="row">
-        {items.map(({ title, imgUrl, text, linkBtn, oferta }) => (
-          <Card
-            title={title}
-            imgUrl={imgUrl}
-            text={text}
-            linkBtn={linkBtn}
-            oferta={oferta}
-          />
-        ))}
+        <Navbar />
+        <Routes>
+        <Route path="/" element={<Home />} />
+          <Route path="/tamales" element={<Tamales />} />
+          <Route path="/atoles" element={<Atoles />} />
+        </Routes>
       </div>
     </div>
   );
