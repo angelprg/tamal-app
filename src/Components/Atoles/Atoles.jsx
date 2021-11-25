@@ -17,7 +17,9 @@ const Atoles = () => {
     <div className={styles.section}>
       {items.map((item) => {
         const { _id, img, name, price } = item;
-        return <Card key={_id} title={name} imgUrl={img} price={price} />;
+        return (
+          <Card key={_id} title={name} imgUrl={img} price={parseInt(price)} />
+        );
       })}
     </div>
   );

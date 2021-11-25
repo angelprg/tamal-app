@@ -4,33 +4,31 @@ import styles from "./Tamales.module.scss";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 
-const Tamales = () => {
+const Tamales = ({ addToCart, removeFromCart, cartItems }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  useEffect(
-    () => {
+  useEffect(() => {
+    let elComponenteExiste = true;
 
-      let elComponenteExiste = true
-
-    fetch("https://api-cafe-tamales.herokuapp.com/api/tamales").then(
-      (result) =>
+    fetch("https://api-cafe-tamales.herokuapp.com/api/tamales")
+      .then((result) =>
         result.json().then((data) => {
-          if (elComponenteExiste){
+          if (elComponenteExiste) {
             setItems(data.tamal);
           }
         })
-    ).catch(() => {
-      setError(true)
-    }).finally(()=> setLoading(false));
+      )
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => setLoading(false));
 
     return () => {
-      elComponenteExiste = false
-    }
-  }
-  
-  , []);
+      elComponenteExiste = false;
+    };
+  }, []);
 
   if (loading)
     return <Loader type="Puff" color="#00BFFF" height={100} width={100} />;
@@ -42,12 +40,28 @@ const Tamales = () => {
       </div>
     );
 
-
   return (
     <div className={styles.section}>
       {items.map((item) => {
         const { _id, img, name, price } = item;
-        return <Card key={_id} title={name} imgUrl={img} price={price} />;
+        const onRemoveFromCart = () => {
+          removeFromCart({id: _id, price})
+        }
+        const qty = cartItems[_id]?.qty
+        
+
+        return (
+          <Card
+            key={_id}
+            title={name}
+            imgUrl={img}
+            price={parseInt(price)}
+            addToCart={addToCart}
+            onRemoveFromCart={onRemoveFromCart}
+            id={_id}
+            qty={qty}
+          />
+        );
       })}
     </div>
   );
