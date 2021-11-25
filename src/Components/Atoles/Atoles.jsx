@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import styles from "./Atoles.module.scss";
 
-const Atoles = () => {
+const Atoles = ({addToCart, removeFromCart, cartItems}) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -17,8 +17,21 @@ const Atoles = () => {
     <div className={styles.section}>
       {items.map((item) => {
         const { _id, img, name, price } = item;
+        const onRemoveFromCart = () => {
+          removeFromCart({ id: _id, price });
+        };
+        const qty = cartItems[_id]?.qty;
         return (
-          <Card key={_id} title={name} imgUrl={img} price={parseInt(price)} />
+          <Card
+            key={_id}
+            title={name}
+            imgUrl={img}
+            price={parseInt(price)}
+            addToCart={addToCart}
+            onRemoveFromCart={onRemoveFromCart}
+            id={_id}
+            qty={qty}
+          />
         );
       })}
     </div>

@@ -5,6 +5,8 @@ import Atoles from "./Components/Atoles/Atoles";
 import Tamales from "./Components/Tamales/Tamales";
 import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
+import PageNotFound from './Components/PageNotFound';
+import ProductoDetalle from './Components/ProductoDetalle';
 
 function App() {
   const [cartItems, setCartItems] = useState({});
@@ -76,6 +78,9 @@ function App() {
               />
             }
           />
+          <Route path="/tamales/:id" element={<ProductoDetalle />} />
+          <Route path="/atoles/:id" element={<ProductoDetalle />} />
+          <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </div>
     </div>
